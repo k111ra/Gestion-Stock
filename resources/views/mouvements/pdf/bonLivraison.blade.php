@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: 'Times New Roman', serif;
-            margin: 40px;
+            margin: 10px;
             background-color: #fff;
         }
 
@@ -86,20 +86,13 @@
 
 <body>
     <div class="header">
-        <img src="{{ public_path('assets/img/1200px-Cotê_d\'Ivoire_Coat_of_Arms.svg.png') }}"
-            alt="Armoiries de Côte d'Ivoire" style="width: 100px;">
-        <h4>RÉPUBLIQUE DE CÔTE D’IVOIRE</h4>
-        <p><strong>Union - Discipline - Travail</strong></p>
-        <h4>MINISTÈRE DE LA JUSTICE ET DES DROITS DE L’HOMME</h4>
-        <h5>Direction des Affaires Financières</h5>
-        <p>Située à Cocody-Riviera Bonoumin, non loin du centre commercial Abidjan Mall, carrefour DJEDJE Mady<br>
-            Tél : 27 22 42 77 70</p>
+        <img src="{{ public_path('assets/img/222539.png') }}" alt="Armoiries de Côte d'Ivoire" style="width:100%;">
     </div>
 
     <div class="title">Bon de livraison de vivres à {{ $mouvement->destination }}</div>
 
     <div class="section">
-        <p><strong>Abidjan, le :</strong> {{ date('d/m/Y', strtotime($mouvement->date_mouvement)) }}</p>
+        {{-- <p><strong>Abidjan, le :</strong> {{ date('d/m/Y', strtotime($mouvement->date_mouvement)) }}</p> --}}
         <p><strong>DATE DE RÉCEPTION :</strong> ...................................</p>
         <p><strong>HEURE :</strong> ...............................................</p>
     </div>
@@ -156,6 +149,10 @@
             </tr>
         </table>
     </div>
+    <div class="" style="height:165px"></div>
+    {{-- <div class="footer">
+        <img src="{{ public_path('assets/img/223522.png') }}" alt="Armoiries de Côte d'Ivoire" style="width:100%;">
+    </div> --}}
 
 </body>
 
