@@ -1,0 +1,18 @@
+/* Replace deprecated -ms-high-contrast with modern forced-colors */
+@media (forced-colors: active) {
+  .menu-vertical,
+  .menu-link,
+  .menu-icon,
+  .menu-inner {
+    forced-color-adjust: none;
+  }
+}
+
+/* Add default styling for better accessibility */
+.menu-item {
+  forced-color-adjust: none;
+}
+
+.menu-item.active {
+  forced-color-adjust: none;
+}

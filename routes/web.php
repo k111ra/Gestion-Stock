@@ -6,6 +6,9 @@ use App\Http\Controllers\FournisseurController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\StockMovementController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ParameterController;
+use App\Http\Controllers\RoleController;
 use App\Models\StockMovement;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
@@ -74,7 +77,27 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middl
 Route::middleware(['auth'])->group(function () {
     // Routes pour les administrateurs uniquement
     Route::middleware(['role:admin'])->group(function () {
-        // Routes d'administration
+        // Gestion des utilisateurs
+        Route::prefix('utilisateurs')->name('users.')->group(function () {
+            Route::get('/', [UserController::class, 'index'])->name('index');
+            Route::get('/create', [UserController::class, 'create'])->name('create');
+            Route::post('/store', [UserController::class, 'store'])->name('store');
+            Route::get('/{user}/edit', [UserController::class, 'edit'])->name('edit');
+            Route::put('/{user}', [UserController::class, 'update'])->name('update');
+            Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
+            Route::get('/{user}', [UserController::class, 'show'])->name('show');
+        });
+
+        // Gestion des paramètres
+        Route::prefix('parametres')->name('parametres.')->group(function () {
+            Route::get('/', [ParameterController::class, 'index'])->name('index');
+            Route::get('/roles', [RoleController::class, 'index'])->name('roles.index');
+            Route::get('/roles/create', [RoleController::class, 'create'])->name('roles.create');
+            Route::post('/roles', [RoleController::class, 'store'])->name('roles.store');
+            Route::get('/roles/{role}/edit', [RoleController::class, 'edit'])->name('roles.edit');
+            Route::put('/roles/{role}', [RoleController::class, 'update'])->name('roles.update');
+            Route::delete('/roles/{role}', [RoleController::class, 'destroy'])->name('roles.destroy');
+        });
     });
 
     // Routes pour les managers
@@ -89,5 +112,20 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/check/{produit}', [StockController::class, 'checkStock'])->name('check');
         Route::post('/entree', [StockController::class, 'entreeStock'])->name('entree');
         Route::post('/sortie', [StockController::class, 'sortieStock'])->name('sortie');
+    });
+
+    // Routes utilisateurs
+    Route::middleware(['permission:users_read'])->group(function () {
+        Route::resource('users', UserController::class);
+    });
+
+    // Routes paramètres
+    Route::prefix('parametres')->name('parametres.')->group(function () {
+        Route::get('/', [ParameterController::class, 'index'])->name('index');
+        // Supprimer ces routes car elles sont en double
+        // Route::get('/roles', [ParameterController::class, 'roles'])->name('roles');
+        // Route::put('/roles', [ParameterController::class, 'updateRolePermissions'])->name('roles.update');
+        // Route::get('/roles/create', [ParameterController::class, 'createRole'])->name('roles.create');
+        // Route::post('/roles/store', [ParameterController::class, 'storeRole'])->name('roles.store');
     });
 });
