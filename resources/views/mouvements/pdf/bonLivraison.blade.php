@@ -61,13 +61,15 @@
 
         .visas-table {
             width: 100%;
-            border-collapse: collapse;
+            border: none;
+            /* Suppression des bordures */
         }
 
         .visas-table td {
             width: 25%;
             text-align: center;
             border: none;
+            /* Supprime les bordures des cellules */
             padding: 10px;
         }
 
@@ -98,10 +100,8 @@
     </div>
 
     <div class="section">
-        <p><strong>Fournisseur :</strong> {{ $mouvement->fournisseur->nom ?? 'Non spécifié' }}</p>
-        <p><strong>NB :</strong> Les denrées réceptionnées à la date du
-            {{ date('d/m/Y', strtotime($mouvement->date_mouvement)) }}
-            couvrent entièrement les besoins pour une période de trois mois.</p>
+        {{-- <p><strong>Fournisseur :</strong> {{ $mouvement->fournisseur->nom ?? 'Non spécifié' }}</p> --}}
+        <p><strong style="color: red">NB :</strong> {{ $mouvement->note }}</p>
     </div>
 
     <table>
@@ -138,6 +138,8 @@
                     <p>Visa Responsable Patrimoine</p>
                     <div class="signature-line"></div>
                 </td>
+            </tr>
+            <tr>
                 <td>
                     <p>Visa du Chef d'Établissement</p>
                     <div class="signature-line"></div>
@@ -149,7 +151,7 @@
             </tr>
         </table>
     </div>
-    <div class="" style="height:165px"></div>
+    {{-- <div class="" style="height:165px"></div> --}}
     {{-- <div class="footer">
         <img src="{{ public_path('assets/img/223522.png') }}" alt="Armoiries de Côte d'Ivoire" style="width:100%;">
     </div> --}}

@@ -14,7 +14,8 @@ class StockMovement extends Model
         'type_mouvement', // Entrée ou Sortie
         'fournisseur_id', // Null si sortie
         'destination', // Null si entrée
-        'date_mouvement'
+        'date_mouvement',
+        'note', // Note sur le mouvement
     ];
     protected $casts = [
         'date_mouvement' => 'date', // Permet de convertir en Carbon automatiquement

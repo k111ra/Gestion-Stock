@@ -55,12 +55,12 @@
                                     <input type="number" class="form-control" id="produits[0][quantite]"
                                         name="produits[0][quantite]" required placeholder="0">
                                 </div>
-                                <div class="col-md-3">
+                                {{-- <div class="col-md-3">
                                     <label for="produits[0][prix_unitaire]" class="form-label">Prix unitaire</label>
                                     <input type="number" step="0.01" class="form-control"
                                         id="produits[0][prix_unitaire]" name="produits[0][prix_unitaire]" required
                                         placeholder="0.00">
-                                </div>
+                                </div> --}}
                                 <div class="col-md-2 d-flex align-items-end">
                                     <button type="button" class="btn btn-danger btn-sm delete-produit">
                                         <i class='bx bx-trash'></i>
@@ -118,6 +118,11 @@
                     <div class="mb-3" id="destinationField" style="display:none;">
                         <label for="destination" class="form-label">Destination</label>
                         <input type="text" class="form-control" id="destination" name="destination" required>
+                    </div>
+                    <div class="mb-3" id="note">
+                        <label for="note" class="form-label">Observation</label>
+                        <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+
                     </div>
 
                     <div class="modal-footer border-top-0 px-0 pb-0">

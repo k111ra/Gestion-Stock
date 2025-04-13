@@ -31,10 +31,11 @@ class StockMovementController extends Controller
             'produits' => 'required|array',
             'produits.*.produit_id' => 'required|exists:produits,id',
             'produits.*.quantite' => 'required|integer|min:1',
-            'produits.*.prix_unitaire' => 'required|numeric|min:0',
+            // 'produits.*.prix_unitaire' => 'required|numeric|min:0',
             'type_mouvement' => 'required|in:Entrée,Sortie',
             'fournisseur_id' => 'nullable|exists:fournisseurs,id',
             'destination' => 'nullable|string',
+            'note' => 'nullable|string|max:255',
             'date_mouvement' => 'required|date'
         ]);
 
@@ -42,13 +43,13 @@ class StockMovementController extends Controller
             'type_mouvement' => $request->type_mouvement,
             'fournisseur_id' => $request->fournisseur_id,
             'destination' => $request->destination,
-            'date_mouvement' => $request->date_mouvement
+            'date_mouvement' => $request->date_mouvement,
+            'note' => $request->note,
         ]);
 
         foreach ($request->produits as $produit) {
             $mouvement->produits()->attach($produit['produit_id'], [
-                'quantite' => $produit['quantite'],
-                'prix_unitaire' => $produit['prix_unitaire']
+                'quantite' => $produit['quantite']
             ]);
         }
         $mouvement->save();
@@ -70,11 +71,12 @@ class StockMovementController extends Controller
             'produits' => 'required|array',
             'produits.*.produit_id' => 'required|exists:produits,id',
             'produits.*.quantite' => 'required|integer|min:1',
-            'produits.*.prix_unitaire' => 'required|numeric|min:0',
+            // 'produits.*.prix_unitaire' => 'required|numeric|min:0',
             'type_mouvement' => 'required|in:Entrée,Sortie',
             'fournisseur_id' => 'nullable|exists:fournisseurs,id',
             'destination' => 'nullable|string',
-            'date_mouvement' => 'required|date'
+            'date_mouvement' => 'required|date',
+            'note' => 'nullable|string|max:255'
         ]);
 
         $mouvement = StockMovement::findOrFail($id);
@@ -82,7 +84,8 @@ class StockMovementController extends Controller
             'type_mouvement' => $request->type_mouvement,
             'fournisseur_id' => $request->fournisseur_id,
             'destination' => $request->destination,
-            'date_mouvement' => $request->date_mouvement
+            'date_mouvement' => $request->date_mouvement,
+            'note' => $request->note,
         ]);
 
         // Détacher tous les produits existants
@@ -91,8 +94,7 @@ class StockMovementController extends Controller
         // Attacher les nouveaux produits avec leurs quantités et prix
         foreach ($request->produits as $produit) {
             $mouvement->produits()->attach($produit['produit_id'], [
-                'quantite' => $produit['quantite'],
-                'prix_unitaire' => $produit['prix_unitaire']
+                'quantite' => $produit['quantite']
             ]);
         }
 

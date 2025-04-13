@@ -55,6 +55,11 @@
                         <input type="date" class="form-control" id="date_mouvement" name="date_mouvement"
                             value="{{ $mouvement->date_mouvement }}" required>
                     </div>
+                    <div class="mb-3" id="note">
+                        <label for="note" class="form-label">Observation</label>
+                        <textarea class="form-control" id="note" name="note" rows="3"></textarea>
+
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
