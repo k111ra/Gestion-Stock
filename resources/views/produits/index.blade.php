@@ -24,10 +24,10 @@
                         <tr>
                             <th>Nom</th>
                             <th>Descriptions</th>
-                            <th>Catégorie</th>
-                            <th>Unité</th>
-                            <th>Conditionnement</th>
-                            <th>Prix Unitaire</th>
+                            <th>Catégories</th>
+                            <th>Unités</th>
+                            <th>Conditionnements</th>
+                            <th>Prix Unitaires</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
