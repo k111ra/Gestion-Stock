@@ -47,16 +47,92 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-edit-alt me-1"></i> Modifier</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="bx bx-trash me-1"></i>
-                                                Supprimer</a>
+                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                data-bs-target="#editProductModal{{ $produit->id }}">
+                                                <i class="bx bx-edit-alt me-1"></i> Modifier
+                                            </a>
+
+                                            <form action="{{ route('produits.destroy', $produit->id) }}" method="POST"
+                                                onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="dropdown-item" type="submit">
+                                                    <i class="bx bx-trash me-1"></i> Supprimer
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
+
+                            {{-- ⬇️ Insère le MODAL juste après la ligne --}}
+                            <div class="modal fade" id="editProductModal{{ $produit->id }}" tabindex="-1"
+                                aria-labelledby="editProductModalLabel{{ $produit->id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editProductModalLabel{{ $produit->id }}">
+                                                Modifier le produit
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('produits.update', $produit->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT') {{-- ⚠️ Correction ici --}}
+                                                <div class="form-group mb-2">
+                                                    <label for="nom">Nom</label>
+                                                    <input type="text" name="nom" class="form-control"
+                                                        value="{{ $produit->nom }}" required>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="descriptions">Descriptions</label>
+                                                    <textarea name="descriptions" class="form-control">{{ $produit->descriptions }}</textarea>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="categorie">Catégorie</label>
+                                                    <select name="categorie" class="form-control" required>
+                                                        <option value="Alimentaire"
+                                                            {{ $produit->categorie == 'Alimentaire' ? 'selected' : '' }}>
+                                                            Alimentaire</option>
+                                                        <option value="Hygiène"
+                                                            {{ $produit->categorie == 'Hygiène' ? 'selected' : '' }}>
+                                                            Hygiène</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="quantite">Quantité</label>
+                                                    <input type="number" name="quantite" class="form-control"
+                                                        value="{{ $produit->quantite }}">
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="unite">Unité</label>
+                                                    <input type="text" name="unite" class="form-control"
+                                                        value="{{ $produit->unite }}">
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="conditionnement">Conditionnement</label>
+                                                    <input type="text" name="conditionnement" class="form-control"
+                                                        value="{{ $produit->conditionnement }}">
+                                                </div>
+                                                <div class="form-group mb-2">
+                                                    <label for="prix_unitaire">Prix Unitaire</label>
+                                                    <input type="text" name="prix_unitaire" class="form-control"
+                                                        value="{{ $produit->prix_unitaire }}">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">Annuler</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>
@@ -64,4 +140,5 @@
     </div>
 
     @include('produits.create')
+    @include('produits.edit')
 @endsection

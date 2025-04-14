@@ -15,6 +15,8 @@ class Produit extends Model
         'categorie',
         'quantite',
         'unite',
+        'conditionnement',
+        'description',
         'date_peremption',
         'etat_stock',
         'fournisseur_id',

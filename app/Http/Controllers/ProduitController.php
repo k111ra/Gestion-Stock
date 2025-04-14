@@ -56,6 +56,7 @@ class ProduitController extends Controller
             'categorie' => 'required|in:Alimentaire,Hygiène',
             'unite' => 'required|string|max:255',
             'conditionnement' => 'nullable|string',
+            'descriptions' => 'nullable|string',
             'prix_unitaire' => 'required|numeric', // Ajout de la validation pour prix_unitaire
         ]);
 
@@ -65,6 +66,7 @@ class ProduitController extends Controller
             'categorie' => $request->categorie,
             'unite' => $request->unite,
             'conditionnement' => $request->conditionnement ?? null,
+            'descriptions' => $request->description ?? null,
             'prix_unitaire' => $request->prix_unitaire,
         ]);
 

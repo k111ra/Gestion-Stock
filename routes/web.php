@@ -32,7 +32,8 @@ Route::prefix('produits')->name('produits.')->group(function () {
     Route::get('/create', [ProduitController::class, 'create'])->name('create');
     Route::post('/store', [ProduitController::class, 'store'])->name('store');
     Route::get('/{produit}/edit', [ProduitController::class, 'edit'])->name('edit');
-    Route::post('/{produit}/update', [ProduitController::class, 'update'])->name('update');
+    Route::put('/{produit}/update', [ProduitController::class, 'update'])->name('update');
+    Route::delete('/{produit}/destroy', [ProduitController::class, 'destroy'])->name('destroy');
 });
 
 // Routes Fournisseurs

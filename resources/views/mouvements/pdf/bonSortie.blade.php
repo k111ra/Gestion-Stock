@@ -99,10 +99,7 @@
         <p><strong>HEURE :</strong> ...............................................</p>
     </div>
 
-    <div class="section">
-        {{-- <p><strong>Fournisseur :</strong> {{ $mouvement->fournisseur->nom ?? 'Non spécifié' }}</p> --}}
-        <p><strong style="color: red">NB :</strong> {{ $mouvement->note }}</p>
-    </div>
+
 
     <table>
         <thead>
@@ -126,22 +123,16 @@
             @endforeach
         </tbody>
     </table>
-
+    <div class="section">
+        {{-- <p><strong>Fournisseur :</strong> {{ $mouvement->fournisseur->nom ?? 'Non spécifié' }}</p> --}}
+        <p><strong style="color: red">NB :</strong> {{ $mouvement->note }}</p>
+    </div>
     <div class="visas">
         <table class="visas-table">
             <tr>
+
                 <td>
-                    <p>Visa DAF</p>
-                    <div class="signature-line"></div>
-                </td>
-                <td>
-                    <p>Visa Responsable Entrepot</p>
-                    <div class="signature-line"></div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p>Visa du Chef d'Établissement</p>
+                    <p>Visa Responsable entrepôt</p>
                     <div class="signature-line"></div>
                 </td>
                 <td>
@@ -149,6 +140,7 @@
                     <div class="signature-line"></div>
                 </td>
             </tr>
+
         </table>
     </div>
     {{-- <div class="" style="height:165px"></div> --}}
