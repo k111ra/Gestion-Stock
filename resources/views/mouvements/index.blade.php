@@ -328,4 +328,5 @@
             elements.typeMouvement.dispatchEvent(new Event('change'));
         });
     </script>
+
 @endsection
